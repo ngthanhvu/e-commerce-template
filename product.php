@@ -6,8 +6,10 @@ include_once "config/DBUntil.php";
 $db = new DBUntil();
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 $category_id = isset($_GET['category']) ? $_GET['category'] : '';
+$min_price = isset($_GET['min_price']) ? $_GET['min_price'] : '';
+$max_price = isset($_GET['max_price']) ? $_GET['max_price'] : '';
 
-$perPage = 8; 
+$perPage = 8;
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $start = ($page - 1) * $perPage;
 
@@ -19,6 +21,16 @@ if (!empty($category_id)) {
     $params[] = $category_id;
 }
 
+if (!empty($min_price)) {
+    $query .= " AND price >= ?";
+    $params[] = $min_price;
+}
+
+if (!empty($max_price)) {
+    $query .= " AND price <= ?";
+    $params[] = $max_price;
+}
+
 $query .= " LIMIT $start, $perPage";
 
 $product = $db->select($query, $params);
@@ -26,8 +38,6 @@ $product = $db->select($query, $params);
 $totalUsers = $db->count("product", "1");
 $totalPages = ceil($totalUsers / $perPage);
 ?>
-
-
 
 <section class="py-5">
     <div class="container">
@@ -39,7 +49,6 @@ $totalPages = ceil($totalUsers / $perPage);
                     <select name="category" class="form-select me-2">
                         <option value="">Chọn danh mục</option>
                         <?php
-                        // Lấy danh sách các danh mục
                         $categories = $db->select("SELECT id, name FROM category");
                         foreach ($categories as $category) {
                             $selected = ($category['id'] == $category_id) ? 'selected' : '';
@@ -47,11 +56,12 @@ $totalPages = ceil($totalUsers / $perPage);
                         }
                         ?>
                     </select>
+                    <input type="number" class="form-control me-2" name="min_price" value="<?php echo $min_price; ?>" placeholder="Min Price">
+                    <input type="number" class="form-control me-2" name="max_price" value="<?php echo $max_price; ?>" placeholder="Max Price">
                     <button type="submit" class="btn btn-outline-success">Lọc</button>
                 </form>
             </div>
         </div>
-        <!-- Hiển thị danh sách sản phẩm -->
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <?php
             foreach ($product as $products) {
@@ -92,18 +102,17 @@ $totalPages = ceil($totalUsers / $perPage);
         <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
                 <?php if ($page > 1) { ?>
-                    <li class="page-item"><a class="page-link" href="?page=<?php echo $page - 1; ?>&search=<?php echo $search; ?>&category=<?php echo $category_id; ?>">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="?page=<?php echo $page - 1; ?>&search=<?php echo $search; ?>&category=<?php echo $category_id; ?>&min_price=<?php echo $min_price; ?>&max_price=<?php echo $max_price; ?>">Previous</a></li>
                 <?php } ?>
 
                 <?php for ($i = 1; $i <= $totalPages; $i++) { ?>
-                    <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>"><a class="page-link" href="?page=<?php echo $i; ?>&search=<?php echo $search; ?>&category=<?php echo $category_id; ?>"><?php echo $i; ?></a></li>
+                    <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>"><a class="page-link" href="?page=<?php echo $i; ?>&search=<?php echo $search; ?>&category=<?php echo $category_id; ?>&min_price=<?php echo $min_price; ?>&max_price=<?php echo $max_price; ?>"><?php echo $i; ?></a></li>
                 <?php } ?>
 
                 <?php if ($page < $totalPages) { ?>
-                    <li class="page-item"><a class="page-link" href="?page=<?php echo $page + 1; ?>&search=<?php echo $search; ?>&category=<?php echo $category_id; ?>">Next</a></li>
+                    <li class="page-item"><a class="page-link" href="?page=<?php echo $page + 1; ?>&search=<?php echo $search; ?>&category=<?php echo $category_id; ?>&min_price=<?php echo $min_price; ?>&max_price=<?php echo $max_price; ?>">Next</a></li>
                 <?php } ?>
             </ul>
         </nav>
     </div>
 </section>
-
