@@ -10,7 +10,12 @@ $db = new DBUntil();
 $product = $db->select("SELECT * FROM product WHERE id = ?", [$id]);
 
 $relatedProducts = [];
-$userID = $_SESSION['username']['id'];
+// $userID = $_SESSION['username']['id'];
+if (!empty($_SESSION['username'])) {
+    $userID = $_SESSION['username']['id'];
+} else {
+    $userID = "";
+}
 if (!empty($product)) {
     $categoryId = $product[0]['category_id'];
 

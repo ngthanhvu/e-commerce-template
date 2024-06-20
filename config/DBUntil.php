@@ -1,7 +1,7 @@
 <?php
 include "config.php";
 define("HOST", "localhost");
-define("DB_NAME", "baovephp");
+define("DB_NAME", "baoveasm");
 define("USERNAME", "root");
 define("PASSWORD", "");
 class DBUntil

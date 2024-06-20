@@ -2,7 +2,7 @@
      <main>
           <div class="container-fluid px-4">
                <br>
-               <h2>Đây là list user</h2>
+               <h2>Manage User</h2>
                <br>
                <table class="table table-bordered">
                     <thead>
@@ -28,8 +28,8 @@
                               echo "<td>" . $user['phone'] . "</td>";
                               echo "<td>" . $user['role'] . "</td>";
                               echo "<td>
-                              <a class='btn btn-primary' href='index.php?view=update-user&id=" . $user['id'] . "'>Thay đổi</a>
-                              <a class='btn btn-danger' href='index.php?view=delete-user&id=" . $user['id'] . "'>Xóa</a>
+                              <a class='btn btn-primary' href='index.php?view=update-user&id=" . $user['id'] . "'><i class='bi bi-pencil-square'></i></a>
+                              <a class='btn btn-danger' href='index.php?view=delete-user&id=" . $user['id'] . "'><i class='bi bi-trash'></i></a>
                               </td>";
                               echo "</tr>";
                          }

@@ -2,7 +2,7 @@
      <main>
           <div class="container-fluid px-4">
                <br>
-               <h2>Đây là list products</h2>
+               <h2>Manage products</h2>
                <a href="./index.php?view=add-product" class="btn btn-primary mb-3">Thêm sản phẩm <i class="fas fa-plus"></i></a>
                <br>
                <table class="table table-bordered">
@@ -31,8 +31,8 @@
                               echo "<td>" . $user['quantity'] . "</td>";
                               echo "<td>" . $user['category_id'] . "</td>";
                               echo "<td>
-                              <a class='btn btn-primary' href='index.php?view=update-product&id=" . $user['id'] . "'>Thay đổi</a>
-                              <a class='btn btn-danger' href='index.php?view=delete-product&id=" . $user['id'] . "'>Xóa</a>
+                              <a class='btn btn-primary' href='index.php?view=update-product&id=" . $user['id'] . "'><i class='bi bi-pencil-square'></i></a>
+                              <a class='btn btn-danger' href='index.php?view=delete-product&id=" . $user['id'] . "'><i class='bi bi-trash'></i></a>
                               </td>";
                               echo "</tr>";
                          }

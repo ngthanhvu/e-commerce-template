@@ -71,5 +71,13 @@ switch ($view) {
      case 'update-bill':
           include_once "./bill/update-bill.php";
           break;
-
+     case 'coupon':
+          include_once "./coupon/index.php";
+          break;
+     case 'add-coupon':
+          include_once "./coupon/add-coupon.php";
+          break;
+     case 'delete-coupon':
+          include_once "./coupon/delete-coupon.php";
+          break;
 }

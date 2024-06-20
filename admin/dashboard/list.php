@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 include_once "../config/DBUntil.php";
 
 $db = new DBUntil();

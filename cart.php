@@ -12,20 +12,26 @@ $subTotal = 0;
 $db = new DBUntil();
 $cartItems = $db->select("SELECT * FROM cart");
 foreach ($cartItems as $key => $value) {
-    $subTotal += $value['price'] * $value['quantity'];
-    $_SESSION['total'] = $subTotal;
+     $subTotal += $value['price'] * $value['quantity'];
+     $_SESSION['total'] = $subTotal;
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['coupon_code'])) {
-    $couponCode = $_POST['coupon_code'];
-    $coupon = $db->select("SELECT * FROM Coupons WHERE Code = '$couponCode' AND IsActive = 1 AND ExpiryDate >= CURDATE()");
-    
-    if ($coupon) {
-        $coupon = $coupon[0];
-        $couponValue = $coupon['DiscountAmount'] > 0 ? $coupon['DiscountAmount'] : $subTotal * ($coupon['DiscountPercentage'] / 100);
-    } else {
-        $errorMsg = 'Invalid or expired coupon code.';
-    }
+     $couponCode = $_POST['coupon_code'];
+     $coupon = $db->select("SELECT * FROM Coupons WHERE code = '$couponCode' AND con_hieu_luc = 1 AND ngay_het_han >= CURDATE()");
+
+     if ($coupon) {
+          $coupon = $coupon[0];
+          if ($coupon['so_tien_giam'] > 0) {
+               $couponValue = $coupon['so_tien_giam'];
+          } else {
+               $couponValue = $subTotal * ($coupon['phan_tram_giam'] / 100);
+          }
+
+          // $couponValue = $coupon['so_tien_giam'] > 0 ? $coupon['so_tien_giam'] : $subTotal * ($coupon['phan_tram_giam'] / 100);
+     } else {
+          $errorMsg = 'Invalid or expired coupon code.';
+     }
 }
 ?>
 
@@ -97,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['coupon_code'])) {
                                                                            </div>
                                                                       </div>
                                                                  </form>
-                                                                 <?php if ($errorMsg): ?>
+                                                                 <?php if ($errorMsg) : ?>
                                                                       <div class="alert alert-danger" role="alert">
                                                                            <?php echo $errorMsg; ?>
                                                                       </div>
@@ -122,15 +128,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['coupon_code'])) {
                                                                                 </td>
                                                                                 <td class="f-w-7 font-18">
                                                                                      <h4>$<?php
-                                                                                     $total = $subTotal - $couponValue;
-                                                                                     // var_dump($total);
-                                                                                     $_SESSION['beforeTotal'] = $total;
-                                                                                     if ($total > 0) {
-                                                                                          echo number_format($total, 0);
-                                                                                     } else {
-                                                                                          echo "0";
-                                                                                     }
-                                                                                     ?></h4>
+                                                                                          $total = $subTotal - $couponValue;
+                                                                                          // var_dump($total);
+                                                                                          $_SESSION['beforeTotal'] = $total;
+                                                                                          if ($total > 0) {
+                                                                                               echo number_format($total, 0);
+                                                                                          } else {
+                                                                                               echo "0";
+                                                                                          }
+                                                                                          ?></h4>
                                                                                 </td>
                                                                            </tr>
                                                                       </tbody>
@@ -141,14 +147,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['coupon_code'])) {
                                              </div>
                                              <div class="cart-footer text-right">
                                                   <form action="test.php?id=<?php echo $cartItems[0]['product_id'] ?>" method="post">
-                                                       <?php           
+                                                       <?php
                                                        foreach ($cartItems as $items) { ?>
                                                             <input type="hidden" name="cart[<?= $items['product_id'] ?>][product_id]" value="<?= $items['product_id'] ?>">
                                                             <input type="hidden" name="cart[<?= $items['product_id'] ?>][quantity]" value="<?= $items['quantity'] ?>">
                                                             <input type="hidden" name="cart[<?= $items['product_id'] ?>][total]" value="<?= $total ?>">
                                                             <input type="hidden" name="cart[<?= $items['product_id'] ?>][price]" value="<?= $items['price'] ?>">
                                                             <input type="hidden" name="cart[<?= $items['product_id'] ?>][cart_id]" value="<?= $items['id'] ?>">
-                                                            <?php } ?>
+                                                       <?php } ?>
                                                        <button type="submit" class="btn btn-success my-1">Checkout<i class="ri-arrow-right-line ml-2"></i></button>
                                                   </form>
                                              </div>

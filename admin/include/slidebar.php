@@ -1,6 +1,6 @@
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
      <!-- Navbar Brand-->
-     <a class="navbar-brand ps-3" href="../index.php">ADMIN Manage</a>
+     <a class="navbar-brand ps-3" href="../index.php">ADMIN Panel</a>
      <!-- Sidebar Toggle-->
      <button style="color: #fff;" class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="" href="#!"><i class="fas fa-bars"></i></button>
      <!-- Navbar Search-->
@@ -28,6 +28,10 @@
                          <a class="nav-link" href="./index.php?view=category">
                               <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                               Danh mục
+                         </a>
+                         <a class="nav-link" href="./index.php?view=coupon">
+                              <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                              Mã giảm giá
                          </a>
                          <a class="nav-link" href="./index.php?view=order">
                               <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
@@ -105,6 +109,12 @@
                     break;
                case 'bill':
                     include_once "./bill/list.php";
+                    break;
+               case 'coupon':
+                    include_once "./coupon/list.php";
+                    break;
+               case 'add-coupon':
+                    include_once "./coupon/add-coupon-form.php";
                     break;
           }
           ?>

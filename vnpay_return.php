@@ -46,7 +46,7 @@ if (isset($_GET['vnp_SecureHash']) && isset($_GET['vnp_TxnRef']) && isset($_GET[
                                 <td align="center" style="padding: 40px 20px;">
                                     <h1 style="margin-bottom: 20px; color: ##28a745">Đặt hàng thành công</h1>
                                     <p style="margin-bottom: 20px;"></p>
-                                    <a href="http://localhost:3000/history.php" style="display: inline-block; padding: 12px 24px; background-color: #007bff; color: #ffffff; text-decoration: none; border-radius: 4px;">Xem lịch sử đơn hàng</a>
+                                    <a href="http://localhost/history.php" style="display: inline-block; padding: 12px 24px; background-color: #007bff; color: #ffffff; text-decoration: none; border-radius: 4px;">Xem lịch sử đơn hàng</a>
                                     <p style="margin-top: 20px;">Cảm ơn bạn đã mua hàng!</p>
                                 </td>
                             </tr>

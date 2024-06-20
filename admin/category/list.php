@@ -23,8 +23,8 @@
                               echo "<td>" . $user['id'] . "</td>";
                               echo "<td>" . $user['name'] . "</td>";
                               echo "<td>
-                              <a class='btn btn-primary' href='index.php?view=update-category&id=" . $user['id'] . "'>Thay đổi</a>
-                              <a class='btn btn-danger' href='index.php?view=delete-category&id=" . $user['id'] . "'>Xóa</a>
+                              <a class='btn btn-primary' href='index.php?view=update-category&id=" . $user['id'] . "'><i class='bi bi-pencil-square'></i></a>
+                              <a class='btn btn-danger' href='index.php?view=delete-category&id=" . $user['id'] . "'><i class='bi bi-trash'></i></a>
                               </td>";
                               echo "</tr>";
                          }

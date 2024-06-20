@@ -2,7 +2,7 @@
      <main>
           <div class="container-fluid px-4">
                <br>
-               <h2>Đây là list Orders</h2>
+               <h2>List Orders Detail</h2>
                <!-- <a href="./index.php?view=add-product" class="btn btn-primary mb-3">Thêm sản phẩm <i class="fas fa-plus"></i></a> -->
                <br>
                <table class="table table-bordered">
@@ -39,7 +39,7 @@
                               echo "<td>" . $orders['price'] . "</td>";
                               echo "<td>" . $orders['created_at'] . "</td>";
                               echo "<td>" . $orders['updated_at'] . "</td>";
-                              echo "<td><a href='./index.php?view=delete-order-detail&id=" . $orders['id'] . "' class='btn btn-danger'>Xóa</a></td>";
+                              echo "<td><a href='./index.php?view=delete-order-detail&id=" . $orders['id'] . "' class='btn btn-danger'><i class='bi bi-trash'></i></a></td>";
                               echo "</tr>";
                          }
                          ?>

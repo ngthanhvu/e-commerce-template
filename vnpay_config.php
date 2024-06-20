@@ -2,7 +2,7 @@
 define("VNPAY_TMN_CODE", "9FHQFJV7");
 define("VNPAY_HASH_SECRET", "51CNF74EOXHO7VEELB0W6Z8P6PI8G4MZ");
 define("VNPAY_URL", "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html");
-define("VNPAY_RETURN_URL", "http://localhost:3000/vnpay_return.php");
+define("VNPAY_RETURN_URL", "http://localhost/vnpay_return.php");
 
 function convertToDateTime($dateString)
 {
